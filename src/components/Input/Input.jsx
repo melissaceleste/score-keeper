@@ -1,16 +1,11 @@
 import '../Input/Input.css'
 import React from 'react'
 
-export default function HistoryEntry({ nameOfGame, players }) {
+export default function Input({ labelText, placeholder, name }) {
   return (
-    <section className="HistoryEntry">
-      {nameOfGame}
-      {players.map((player, index) => (
-        <div key={index} className="HistoryEntry__player">
-          <span>{player.name}</span>
-          <span>{player.score}</span>
-        </div>
-      ))}
-    </section>
+    <label className="Input">
+      {labelText}
+      <input name={name} placeholder={placeholder} type="text" />
+    </label>
   )
 }

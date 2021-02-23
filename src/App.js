@@ -5,56 +5,33 @@ import GameForm from './components/GameForm'
 import Navigation from './components/Navigation'
 import Header from './components/Header'
 import HistoryEntry from './components/HistoryEntry'
-
+import { useState } from 'react'
 import React from 'react'
 
 import './App.css'
 
-export default function App() {
+function App() {
+  const [players, setPlayers] = useState([])
+
   return (
     <div className="App">
-      <header className="App-header"></header>
-
-      <PlayerForm onAddPlayer={() => console.log('onAddPlayer')} />
-      <Player
-        name="Jane Doe"
-        score="30"
-        onMinus={() => console.log('minuuuuus')}
-        onPlus={() => console.log('pluuuuus')}
-      />
-
-      <Player
-        name="John Doe"
-        score="20"
-        onMinus={() => console.log('minuuuuus')}
-        onPlus={() => console.log('pluuuuus')}
-      />
-
-      <Button
-        onClick={() => console.log('reset scoooores')}
-        text="Reset scores"
-      />
-
-      <Button onClick={() => console.log('reset alllll')} text="Reset all" />
-
-      <GameForm
-        onCreateGame={() => console.log('create Game')}
-        // labelText= {["Name of game", "Names of Players"]}
-        // placeholderText= {["e.g. Carcassone", "e.g. John Doe, Jane Doe"]}
-        // addPlayerNames= {() => console.log('show gameForm')}
-        // addNameOfGame= {() => console.log('show gameForm')}
-      />
-
+      <PlayerForm onAddPlayer={handleAddPlayer} />
+      {players.map((player, index) => (
+        <Player
+          name={player.name}
+          score={player.score}
+          onPlus={() => handlePlus(index)}
+          onMinus={() => handleMinus(index)}
+        />
+      ))}
+      <Button text="Reset scores" onClick={resetScore}></Button>
+      <Button text="Reset all" onClick={resetAll}></Button>
+      <GameForm onCreateGame={() => console.log('onCreateGame')} />
       <Navigation
-        onNavigate={index => console.log(index)}
         activeIndex={0}
-        pages={['Play', 'History']}
+        onNavigate={index => console.log('onNavigate', index)}
       />
-
       <Header text="Carcassonne" />
-
-      <Button onClick={() => console.log('end gaaaame')} text="End game" />
-
       <HistoryEntry
         nameOfGame="Carcassonne"
         players={[
@@ -64,4 +41,36 @@ export default function App() {
       />
     </div>
   )
+
+  function handleAddPlayer(name) {
+    setPlayers(oldPlayers => [...oldPlayers, { name, score: 0 }])
+  }
+
+  function resetAll() {
+    setPlayers([])
+  }
+
+  function resetScore() {
+    setPlayers(players.map(player => ({ ...player, score: 0 })))
+  }
+
+  function handlePlus(index) {
+    const currentPlayer = players[index]
+    setPlayers([
+      ...players.slice(0, index),
+      { ...currentPlayer, score: currentPlayer.score + 1 },
+      ...players.slice(index + 1),
+    ])
+  }
+
+  function handleMinus(index) {
+    const currentPlayer = players[index]
+    setPlayers([
+      ...players.slice(0, index),
+      { ...currentPlayer, score: currentPlayer.score - 1 },
+      ...players.slice(index + 1),
+    ])
+  }
 }
+
+export default App
