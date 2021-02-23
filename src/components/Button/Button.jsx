@@ -9,7 +9,11 @@ export default function Button({text, onClick}) {
         <button
         className="Button"
         onClick={onClick}
-        > {text} </button>
+        > 
+        
+        {text} 
+        
+        </button>
        
       </section>
 

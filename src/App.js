@@ -43,11 +43,11 @@ text="Reset all"
 />
 
 <GameForm
-
-labelText= {["Name of game", "Names of Players"]}
-placeholderText= {["e.g. Carcassone", "e.g. John Doe, Jane Doe"]}
-addPlayerNames= {() => console.log('show gameForm')}
-addNameOfGame= {() => console.log('show gameForm')}
+onCreateGame={() => console.log('create Game')}
+// labelText= {["Name of game", "Names of Players"]}
+// placeholderText= {["e.g. Carcassone", "e.g. John Doe, Jane Doe"]}
+// addPlayerNames= {() => console.log('show gameForm')}
+// addNameOfGame= {() => console.log('show gameForm')}
 />
 
 <Navigation 
@@ -57,7 +57,7 @@ pages={['Play', 'History']}
 />
 
 <Header 
-text="Carcassone"
+text="Carcassonne"
 />
 
 <Button 
@@ -66,7 +66,8 @@ text="End game"
 />
 
 <HistoryEntry 
-
+nameofGame="Carcasonne"
+players={[{name:'John Doe', score:10}, {name:'Jane Doe', score:20}]}
 />
 
     </div>
