@@ -1,6 +1,11 @@
 .Button {
-padding: 10px;
-margin: 15px;
-border-radius: 5px;
-text-align: center;
+  padding: 10px;
+  margin: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.Button--active {
+  background: #333;
+  color: white;
 }

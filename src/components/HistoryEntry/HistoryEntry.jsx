@@ -1,17 +1,16 @@
 import '../HistoryEntry/HistoryEntry.css'
 import React from 'react'
 
-export default function HistoryEntry({nameofGame, players}) {
-
-    return ( 
-        <header className="Header">
-         <h1> {nameofGame}</h1>
-         <section> {players.name} {players.score} </section>
-
-      </header>
-     
-
-    )
-
-
+export default function HistoryEntry({ nameOfGame, players }) {
+  return (
+    <section className="HistoryEntry">
+      {nameOfGame}
+      {players.map((player, index) => (
+        <div key={index} className="HistoryEntry__player">
+          <span>{player.name}</span>
+          <span>{player.score}</span>
+        </div>
+      ))}
+    </section>
+  )
 }

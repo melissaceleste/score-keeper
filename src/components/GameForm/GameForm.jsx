@@ -3,30 +3,27 @@ import React from 'react'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
 
-export default function GameForm({ onCreateGame}) {
+export default function GameForm({ onCreateGame }) {
+  return (
+    <form className="GameForm" onSubmit={handleSubmit}>
+      <Input labelText="Name of game" placeholder="e.g. Carcassonne" />
+      <Input labelText="Player names" placeholder="e.g. John Doe, Jane Doe" />
+      <Button text="Create game" />
+    </form>
+  )
 
-  function handleSubmit (event) {
+  function handleSubmit(event) {
     event.preventDefault()
-    const form=event.target
+    const form = event.target
     // get data from input
-    //const input=form.elements.player
-    //const name=input.value 
-    //addNameOfGame(name)
-    //addPlayerNames(name)
-    }
- 
-    return ( 
-        <form className="GameForm" onSubmit={handleSubmit}>
+    const { nameOfGame, playerNames } = form.elements
+    onCreateGame({
+      nameOfGame: nameOfGame.value,
+      playerNames: playerNames.value.split(',').map(name => name.trim()),
 
-<Input labelText="Name of game" placeholder= "e.g. Carcasonne" />
-<Input labelText="Player names" placeholder= "e.g. John Die Jane Doe" />
-<Button text="Create game" />
-
-
-       
- </ form>
-
-    )}
-
-
-  
+      // hieraus wollen wir aber ein Array machen, deshalp mit split. 'Jane, John' => ['Jane', 'John'] wir splitten beim Komma
+      // damit wir jetzt noch die Leerzeichen rausnehmen können, erstellen wir ein neues Array mit Map und trimmen das
+    })
+    form.reset()
+  }
+}
