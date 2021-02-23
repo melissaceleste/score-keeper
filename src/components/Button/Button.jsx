@@ -1,19 +1,8 @@
-import '../Button/Button.css'
-import React from 'react'
+import styled from 'styled-components/macro'
 
-export default function Button({text, onClick}) {
-
-    return ( 
-        <section>
-
-        <button
-        className="Button"
-        onClick={onClick}
-        > {text} </button>
-       
-      </section>
-
-    )
-
-
-}
+export default styled.button`
+  padding: 10px;
+  margin: 15px;
+  border-radius: 5px;
+  text-align: center;
+`
