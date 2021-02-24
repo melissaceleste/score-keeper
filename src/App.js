@@ -1,10 +1,14 @@
 import PlayerForm from './components/PlayerForm'
 import PlayerSection from './components/Player'
-
-// import styled from 'styled-components/macro'
-import React from 'react'
+import Button from './components/Button'
+// import GameForm from './components/GameForm'
+// import Navigation from './components/Navigation'
+// import Header from './components/Header'
+// import HistoryEntry from './components/HistoryEntry'
 import { useState } from 'react'
-import Button from './components/Button/Button'
+import React from 'react'
+
+import './App.css'
 
 export default function App() {
   const [players, setPlayers] = useState([])
