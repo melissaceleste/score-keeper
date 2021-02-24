@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Button from '../Button'
+import Button from './Button'
 
 export default function PlayerSection({ name, score, onMinus, onPlus }) {
   const hue = Math.min(score * 10, 120)

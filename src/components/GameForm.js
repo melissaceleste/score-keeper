@@ -1,11 +1,11 @@
-import '../GameForm/GameForm.css'
+import styled from 'styled-components/macro'
 import React from 'react'
-import Button from '../Button/Button'
-import Input from '../Input/Input'
+import Button from './Button'
+import Input from './Input'
 
 export default function GameForm({ onCreateGame }) {
   return (
-    <form className="GameForm" onSubmit={handleSubmit}>
+    <GameFormForm onSubmit={handleSubmit}>
       <Input
         name="nameOfGame"
         labelText="Name of game"
@@ -16,8 +16,8 @@ export default function GameForm({ onCreateGame }) {
         labelText="Player names"
         placeholder="e.g. John Doe, Jane Doe"
       />
-      <Button text="Create game" />
-    </form>
+      <CreateGameButton> Create game </CreateGameButton>
+    </GameFormForm>
   )
 
   function handleSubmit(event) {
@@ -35,3 +35,16 @@ export default function GameForm({ onCreateGame }) {
     nameOfGame.focus()
   }
 }
+
+const GameFormForm = styled.form`
+  width: 300px;
+  text-align: start;
+  background-color: #eee;
+  box-shadow: 1px 2px #aaa;
+  margin: 20px 10px;
+  padding: 20px;
+`
+const CreateGameButton = styled(Button)`
+  width: 100% auto;
+  height: 100% auto;
+`
