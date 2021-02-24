@@ -2,13 +2,19 @@ import styled from 'styled-components/macro'
 import React from 'react'
 import Button from './Button'
 
-export default function Navigation({ onNavigate, activeIndex }) {
+export default function Navigation({ onNavigate, currentPage }) {
   return (
     <NavigationContainer>
-      <NavButton onClick={() => onNavigate(0)} isActive={activeIndex === 0}>
+      <NavButton
+        isActive={currentPage === 'play'}
+        onClick={() => onNavigate('play')}
+      >
         Play
       </NavButton>
-      <NavButton isActive={activeIndex === 1} onClick={() => onNavigate(1)}>
+      <NavButton
+        isActive={currentPage === 'history'}
+        onClick={() => onNavigate('history')}
+      >
         History
       </NavButton>
     </NavigationContainer>
@@ -17,8 +23,6 @@ export default function Navigation({ onNavigate, activeIndex }) {
 
 const NavigationContainer = styled.nav`
   width: 100% auto;
-  background-color: #eee;
-  padding: 2px;
   display: flex;
   justify-content: space-evenly;
 `

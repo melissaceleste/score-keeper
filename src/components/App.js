@@ -1,59 +1,53 @@
-import PlayerForm from './PlayerForm'
-import PlayerSection from './Player'
-import Button from './Button'
-import GameForm from './GameForm'
 import Navigation from './Navigation'
-import Header from './Header'
-import HistoryEntry from './HistoryEntry'
+
+import PlayPage from './PlayPage'
+import GamePage from './GamePage'
+import HistoryPage from './HistoryPage'
 import { useState } from 'react'
 import React from 'react'
-import styled from 'styled-components/macro'
+
+import { v4 as uuidv4 } from 'uuid'
 
 export default function App() {
   const [players, setPlayers] = useState([])
+  const [currentPage, setCurrentPage] = useState('play')
+  const [nameOfGame, setNameOfGame] = useState('')
+  const [history, setHistory] = useState([])
 
   return (
-    <div className="App">
-      <PlayerForm onAddPlayer={handleAddPlayer} />
-      {players.map(({ name, score }, index) => (
-        <PlayerSection
-          key={name}
-          name={name}
-          score={score}
-          onPlus={() => handlePlus(index)}
-          onMinus={() => handleMinus(index)}
-        />
-        // React.createElement(Player, {name, score, onPlus: () => handlePlus(index)})
-      ))}
-      {/*  <Button onClick={resetScore}>Reset scores </Button>
-      <Button onClick={resetAll}>Reset all</Button> */}
-      <ButtonGrid>
-        <Button onClick={resetScore}>Reset scores</Button>
-        <DangerButton onClick={resetAll}>Reset all</DangerButton>
-      </ButtonGrid>
+    <div>
+      {currentPage === 'play' && <PlayPage createGame={createGame} />}
 
-      <GameForm onCreateGame={data => console.log('onCreateGame', data)} />
-      <Navigation
-        activeIndex={0}
-        onNavigate={index => console.log('onNavigate', index)}
-      />
-      <Header text="Carcassonne" />
-      <HistoryEntry
-        nameOfGame="Carcassonne"
-        players={[
-          { name: 'John Doe', score: 10 },
-          { name: 'Jane Doe', score: 20 },
-        ]}
-      />
+      {currentPage === 'game' && (
+        <GamePage
+          nameOfGame={nameOfGame}
+          players={players}
+          handleMinus={handleMinus}
+          handlePlus={handlePlus}
+          resetScores={resetScore}
+          endGame={endGame}
+        />
+      )}
+
+      {currentPage === 'history' && <HistoryPage history={history} />}
+
+      {(currentPage === 'play' || currentPage === 'history') && (
+        <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
+      )}
     </div>
   )
 
-  function handleAddPlayer(name) {
-    setPlayers(oldPlayers => [...oldPlayers, { name, score: 0 }])
+  function createGame({ nameOfGame, playerNames }) {
+    setNameOfGame(nameOfGame)
+    setPlayers(playerNames.map(name => ({ name, score: 0 })))
+    setCurrentPage('game')
   }
 
-  function resetAll() {
+  function endGame() {
+    setHistory([{ players, nameOfGame, id: uuidv4() }, ...history])
     setPlayers([])
+    setNameOfGame('')
+    setCurrentPage('play')
   }
 
   function resetScore() {
@@ -78,12 +72,3 @@ export default function App() {
     ])
   }
 }
-const DangerButton = styled(Button)`
-  background-color: mistyrose;
-  border: 1px solid red;
-`
-const ButtonGrid = styled.div`
-  display: grid;
-  gap: 5px;
-  grid-template-columns: 1fr 1fr;
-`

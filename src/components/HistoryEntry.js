@@ -16,7 +16,7 @@ export default function HistoryEntry({ nameOfGame, players }) {
 }
 
 const HistoryEntrySection = styled.section`
-  background-color: pink;
+  background-color: #eee;
 `
 const HistoryGame = styled.div`
   text-transform: uppercase;
@@ -29,7 +29,7 @@ const Container = styled.div`
 `
 
 const HistoryPlayer = styled.span`
-  color: white;
+  color: teal;
   margin: 5px 20px;
 `
 const HistoryScore = styled.span`
