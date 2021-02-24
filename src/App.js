@@ -1,44 +1,31 @@
 import PlayerForm from './components/PlayerForm'
-import Player from './components/Player'
+import PlayerSection from './components/Player'
 import Button from './components/Button'
-import GameForm from './components/GameForm'
-import Navigation from './components/Navigation'
-import Header from './components/Header'
-import HistoryEntry from './components/HistoryEntry'
+// import GameForm from './components/GameForm'
+// import Navigation from './components/Navigation'
+// import Header from './components/Header'
+// import HistoryEntry from './components/HistoryEntry'
 import { useState } from 'react'
 import React from 'react'
 
 import './App.css'
 
-function App() {
+export default function App() {
   const [players, setPlayers] = useState([])
 
   return (
     <div className="App">
       <PlayerForm onAddPlayer={handleAddPlayer} />
       {players.map((player, index) => (
-        <Player
+        <PlayerSection
           name={player.name}
           score={player.score}
           onPlus={() => handlePlus(index)}
           onMinus={() => handleMinus(index)}
         />
       ))}
-      <Button text="Reset scores" onClick={resetScore}></Button>
-      <Button text="Reset all" onClick={resetAll}></Button>
-      <GameForm onCreateGame={() => console.log('onCreateGame')} />
-      <Navigation
-        activeIndex={0}
-        onNavigate={index => console.log('onNavigate', index)}
-      />
-      <Header text="Carcassonne" />
-      <HistoryEntry
-        nameOfGame="Carcassonne"
-        players={[
-          { name: 'John Doe', score: 10 },
-          { name: 'Jane Doe', score: 20 },
-        ]}
-      />
+      <Button onClick={resetScore}>Reset scores </Button>
+      <Button onClick={resetAll}>Reset all</Button>
     </div>
   )
 
@@ -72,5 +59,3 @@ function App() {
     ])
   }
 }
-
-export default App
