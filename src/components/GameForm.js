@@ -43,6 +43,7 @@ const GameFormForm = styled.form`
   box-shadow: 1px 2px #aaa;
   margin: 20px 10px;
   padding: 20px;
+  border-radius: 10px;
 `
 const CreateGameButton = styled(Button)`
   width: 100% auto;

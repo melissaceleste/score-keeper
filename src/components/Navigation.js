@@ -1,32 +1,30 @@
 import styled from 'styled-components/macro'
 import React from 'react'
 import Button from './Button'
+import { NavLink } from 'react-router-dom'
 
-export default function Navigation({ onNavigate, currentPage }) {
+export default function Navigation() {
   return (
-    <NavigationContainer>
-      <NavButton
-        isActive={currentPage === 'play'}
-        onClick={() => onNavigate('play')}
-      >
+    <Nav>
+      {/*    <NavigationContainer> */}
+      <Button as={NavLink} exact to="/">
         Play
-      </NavButton>
-      <NavButton
-        isActive={currentPage === 'history'}
-        onClick={() => onNavigate('history')}
-      >
+      </Button>
+      <Button as={NavLink} rxact to="/history">
         History
-      </NavButton>
-    </NavigationContainer>
+      </Button>
+      {/* </NavigationContainer> */}
+    </Nav>
   )
 }
 
-const NavigationContainer = styled.nav`
+const Nav = styled.nav`
   width: 100% auto;
   display: flex;
   justify-content: space-evenly;
 `
-const NavButton = styled(Button)`
+/* const NavButton = styled(Button)`
   width: 100% auto;
   height: 100% auto;
 `
+ */

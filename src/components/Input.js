@@ -13,6 +13,9 @@ export default function Input({ labelText, placeholder, name }) {
 const InputStyle = styled.input`
   width: 300px;
   border: 1px solid pink;
+  height: 20px;
+  margin: 7px;
+  border-radius: 5px;
 `
 const LabelStyle = styled.label`
   font-size: 16px;
